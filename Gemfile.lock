@@ -4,7 +4,6 @@ PATH
     logging_worker (0.0.1)
       pg
       rails (~> 4.1)
-      sidekiq (~> 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -123,3 +122,4 @@ DEPENDENCIES
   logging_worker!
   pry
   rspec-rails
+  sidekiq (~> 3.3)
