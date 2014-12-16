@@ -14,6 +14,10 @@ Bundle it!
 
     $ bundle install
 
+Install migrations
+
+    $ rake logging_worker_engine:install:migrations
+
 Add to your workers.
 
 ```ruby
@@ -30,10 +34,10 @@ end
 
 Each time a background job is performed a new `JobRun` will be created. `JobRun` has the following attributes:
 
-- `worker_class`: worker class that performed the job
-- `arguments`: arguments used for running the job
-- `successful`: if the job finished successfully, with no errors
-- `completed_at`: when the job finished, regardless of success status
-- `log`: Log of the job
-- `error_message`: if the job errored, the error message
-- `error_backtrace`: if the job errored: the error backtrace
+- `worker_class` worker class that performed the job
+- `arguments` arguments used for running the job
+- `successful` if the job finished successfully, with no errors
+- `completed_at` when the job finished, regardless of success status
+- `log` Log of the job
+- `error_message` if the job errored, the error message
+- `error_backtrace` if the job errored, the error backtrace
