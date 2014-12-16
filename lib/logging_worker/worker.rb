@@ -17,6 +17,7 @@ module LoggingWorker
 
       job_run.successful!
     rescue => e
+      job_run.error_class = e.class.name
       job_run.error_message = e.message
       job_run.error_backtrace = e.backtrace
       job_run.save!

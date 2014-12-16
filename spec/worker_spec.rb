@@ -58,6 +58,7 @@ describe LoggingWorker::Worker do
     expect {
       error_worker.perform
     }.to raise_error(RuntimeError)
+    expect(error_worker.job_run.error_class).to eq("RuntimeError")
     expect(error_worker.job_run.error_message).to eq("There was a problem")
     expect(error_worker.job_run.error_backtrace.join).to include("error_worker.rb")
   end

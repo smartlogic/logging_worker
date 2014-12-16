@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20141215211104) do
     t.boolean  "successful"
     t.datetime "completed_at"
     t.text     "log"
+    t.text     "error_class"
     t.text     "error_message"
     t.text     "error_backtrace", array: true
     t.datetime "created_at"
