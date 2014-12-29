@@ -3,7 +3,7 @@ class NewJobRunWorker
   prepend LoggingWorker::Worker
 
   sidekiq_options({
-    :logging_worker => ::JobRun
+    :job_run_class => ::JobRun
   })
 
   def perform

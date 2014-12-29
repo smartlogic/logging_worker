@@ -3,8 +3,8 @@ module LoggingWorker
     delegate :logger, :to => :job_run
 
     def job_run_class
-      if sidekiq_options_hash && sidekiq_options_hash.has_key?("logging_worker")
-        sidekiq_options_hash["logging_worker"]
+      if sidekiq_options_hash && sidekiq_options_hash.has_key?("job_run_class")
+        sidekiq_options_hash["job_run_class"]
       else
         LoggingWorker::JobRun
       end
