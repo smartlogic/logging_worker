@@ -2,8 +2,16 @@ module LoggingWorker
   module Worker
     delegate :logger, :to => :job_run
 
+    def job_run_class
+      if sidekiq_options_hash && sidekiq_options_hash.has_key?("logging_worker")
+        sidekiq_options_hash["logging_worker"]
+      else
+        LoggingWorker::JobRun
+      end
+    end
+
     def job_run
-      @job_run ||= JobRun.new
+      @job_run ||= job_run_class.new
     end
 
     def perform(*args)

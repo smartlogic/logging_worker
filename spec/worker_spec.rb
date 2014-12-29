@@ -4,12 +4,13 @@ describe LoggingWorker::Worker do
   let(:worker) { BlankWorker.new }
   let(:error_worker) { ErrorWorker.new }
   let(:logging_worker) { LogWorker.new }
+  let(:new_job_run_worker) { NewJobRunWorker.new }
 
   specify "creating a job run when the worker starts performing" do
     expect {
       worker.perform
     }.to change {
-      JobRun.count
+      LoggingWorker::JobRun.count
     }.by(1)
   end
 
@@ -61,5 +62,10 @@ describe LoggingWorker::Worker do
     expect(error_worker.job_run.error_class).to eq("RuntimeError")
     expect(error_worker.job_run.error_message).to eq("There was a problem")
     expect(error_worker.job_run.error_backtrace.join).to include("error_worker.rb")
+  end
+
+  specify "override the logging class" do
+    new_job_run_worker.perform
+    expect(new_job_run_worker.job_run).to be_a(::JobRun)
   end
 end
