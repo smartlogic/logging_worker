@@ -41,8 +41,8 @@ describe LoggingWorker::Worker do
   end
 
   specify "saving the arguments" do
-    worker.perform(true)
-    expect(worker.job_run.arguments).to eq([true])
+    worker.perform("arg")
+    expect(worker.job_run.arguments).to eq(["arg"])
   end
 
   specify "saving the worker class" do

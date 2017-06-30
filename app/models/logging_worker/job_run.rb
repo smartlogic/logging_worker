@@ -1,4 +1,4 @@
-class LoggingWorker::JobRun < ActiveRecord::Base
+class LoggingWorker::JobRun < ApplicationRecord
   after_initialize do
     self[:log] ||= ""
   end
