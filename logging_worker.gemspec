@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "pg"
 
   s.add_development_dependency "rspec-rails", "~> 3.0"
-  s.add_development_dependency "sidekiq", "~> 3.3"
+  s.add_development_dependency "sidekiq", "~> 5.0"
   s.add_development_dependency "pry", "~> 0.10"
 
   s.test_files = Dir["spec/**/*"]
