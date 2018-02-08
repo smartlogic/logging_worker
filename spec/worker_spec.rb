@@ -68,4 +68,29 @@ describe LoggingWorker::Worker do
     new_job_run_worker.perform
     expect(new_job_run_worker.job_run).to be_a(::JobRun)
   end
+
+  specify "allow the flush of a log" do
+    run = LoggingWorker::JobRun.create
+    run.logger.info "Test this"
+    expect(LoggingWorker::JobRun.first.log).to eq("")
+    run.flush_log!
+    expect(LoggingWorker::JobRun.first.log).to include("Test this")
+    run.logger.info "Testing more"
+    run.flush_log!
+    expect(LoggingWorker::JobRun.first.log).to include("Test this")
+    expect(LoggingWorker::JobRun.first.log).to include("Testing more")
+    run.completed!
+    expect(LoggingWorker::JobRun.first.log).to include("Test this")
+    expect(LoggingWorker::JobRun.first.log).to include("Testing more")
+  end
+
+  specify "self desctruct on complete" do
+    run = LoggingWorker::JobRun.create
+    run.do_not_record!
+    expect {
+      run.completed!
+    }.to change {
+      LoggingWorker::JobRun.count
+    }.by(-1)
+  end
 end
