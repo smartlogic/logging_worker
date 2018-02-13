@@ -19,8 +19,6 @@ module LoggingWorker
       job_run.arguments = args
       job_run.save!
 
-      job_run.log_will_change!
-
       super
 
       job_run.successful!
