@@ -10,6 +10,7 @@ describe JobRun do
   specify "logging during the run" do
     job_run = JobRun.new
     job_run.logger.info("test")
+    job_run.flush_log!
     expect(job_run.log).to include("test")
   end
 end

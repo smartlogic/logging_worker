@@ -79,9 +79,11 @@ describe LoggingWorker::Worker do
     run.flush_log!
     expect(LoggingWorker::JobRun.first.log).to include("Test this")
     expect(LoggingWorker::JobRun.first.log).to include("Testing more")
+    run.logger.info "Testing even more"
     run.completed!
     expect(LoggingWorker::JobRun.first.log).to include("Test this")
     expect(LoggingWorker::JobRun.first.log).to include("Testing more")
+    expect(LoggingWorker::JobRun.first.log).to include("Testing even more")
   end
 
   specify "self desctruct on complete" do
